@@ -38,9 +38,11 @@ class CADDataset(Dataset):
     def __getitem__(self, index):
         data_id = self.all_data[index]
         h5_path = os.path.join(self.raw_data, data_id + ".h5")
+        print("[cad_dataset.py-__getitem__]:\n")
+        print(f"Loading data from: {h5_path}")
         with h5py.File(h5_path, "r") as fp:
             cad_vec = fp["vec"][:] # (len, 1 + N_ARGS)
-
+        print(f"Original CAD vector shape: {cad_vec.shape}")
         if self.aug and self.phase == "train":
             command1 = cad_vec[:, 0]
             ext_indices1 = np.where(command1 == EXT_IDX)[0]
@@ -78,6 +80,8 @@ class CADDataset(Dataset):
         args = cad_vec[:, 1:]
         command = torch.tensor(command, dtype=torch.long)
         args = torch.tensor(args, dtype=torch.long)
+
+        print(f"Returning command shape: {command.shape}, args shape: {args.shape}")
         return {"command": command, "args": args, "id": data_id}
 
     def __len__(self):
