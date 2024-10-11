@@ -30,14 +30,14 @@ def main():
     for e in range(clock.epoch, cfg.nr_epochs):
         # begin iteration
         pbar = tqdm(train_loader)
-        print(f"[train.py-main]:\n")
+        #print(f"[train.py-main]:\n")
         for b, data in enumerate(pbar):
             # train step
             # 打印每个 batch 的大小和内容的 key
-            print(f"Batch {b}:")
-            print(f"Data keys: {data.keys()}")  # 打印数据的 keys，比如 'command' 和 'args'
-            print(f"Command shape: {data['command'].shape}")
-            print(f"Args shape: {data['args'].shape}")
+            #print(f"Batch {b}:")
+            #print(f"Data keys: {data.keys()}")  # 打印数据的 keys，比如 'command' 和 'args'
+            #print(f"Command shape: {data['command'].shape}")
+            #print(f"Args shape: {data['args'].shape}")
             outputs, losses = tr_agent.train_func(data)
 
             pbar.set_description("EPOCH[{}][{}]".format(e, b))
