@@ -38,7 +38,7 @@ class CADDataset(Dataset):
     def __getitem__(self, index):
         data_id = self.all_data[index]
         h5_path = os.path.join(self.raw_data, data_id + ".h5")
-        print("[cad_dataset.py-__getitem__]:\n")
+        print("[cad_dataset.py-__getitem__]:")
         print(f"Loading data from: {h5_path}")
         with h5py.File(h5_path, "r") as fp:
             cad_vec = fp["vec"][:] # (len, 1 + N_ARGS)
