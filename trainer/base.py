@@ -115,19 +115,19 @@ class BaseTrainer(object):
         """one step of training"""
         self.net.train()
 
-        print(f"[base.py-train_func]:\n")
+       # print(f"[base.py-train_func]:\n")
         # 打印模型当前的状态
-        print("Starting forward pass")
+        #print("Starting forward pass")
 
         # 打印输入数据的设备和形状
-        print(f"Commands device: {data['command'].device}, shape: {data['command'].shape}")
-        print(f"Args device: {data['args'].device}, shape: {data['args'].shape}")
+        #print(f"Commands device: {data['command'].device}, shape: {data['command'].shape}")
+        #print(f"Args device: {data['args'].device}, shape: {data['args'].shape}")
 
         # forward pass
         outputs, losses = self.forward(data)
 
         # 打印输出的形状
-        print(f"Outputs shape: {outputs['command'].shape}, Losses: {losses}")
+        #print(f"Outputs shape: {outputs['command'].shape}, Losses: {losses}")
 
         outputs, losses = self.forward(data)
 
