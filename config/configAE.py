@@ -84,7 +84,7 @@ class ConfigAE(object):
         parser.add_argument('--batch_size', type=int, default=256, help="batch size")
         parser.add_argument('--num_workers', type=int, default=8, help="number of workers for data loading")
 
-        parser.add_argument('--nr_epochs', type=int, default=200, help="total number of epochs to train")
+        parser.add_argument('--nr_epochs', type=int, default=100, help="total number of epochs to train")
         parser.add_argument('--lr', type=float, default=1e-3, help="initial learning rate")
         parser.add_argument('--grad_clip', type=float, default=1.0, help="initial learning rate")
         parser.add_argument('--warmup_step', type=int, default=2000, help="step size for learning rate warm up")
