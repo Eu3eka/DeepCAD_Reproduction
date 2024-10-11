@@ -24,19 +24,19 @@ class TrainerAE(BaseTrainer):
         commands = data['command'].cuda()  # (N, S)
         args = data['args'].cuda()  # (N, S, N_ARGS)
 
-        print(f"[trainAE-forward]:\n")
+       # print(f"[trainAE-forward]:\n")
         # 打印命令和参数的形状及设备
-        print(f"Forward pass with commands shape: {commands.shape} and args shape: {args.shape}")
+        #print(f"Forward pass with commands shape: {commands.shape} and args shape: {args.shape}")
 
         outputs = self.net(commands, args)
 
         # 打印输出的内容
-        print(f"Network output shape: {outputs['command'].shape}")
+       # print(f"Network output shape: {outputs['command'].shape}")
 
         loss_dict = self.loss_func(outputs)
 
         # 打印损失字典
-        print(f"Loss dictionary: {loss_dict}")
+       # print(f"Loss dictionary: {loss_dict}")
 
         return outputs, loss_dict
 
