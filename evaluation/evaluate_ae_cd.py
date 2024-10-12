@@ -67,8 +67,6 @@ def process_one(path):
     if not os.path.exists(os.path.dirname(gt_pc_path)):
         os.makedirs(os.path.dirname(gt_pc_path))
 
-    print(f"Processing file: {path}, generated gt_pc_path: {gt_pc_path}")
-
     # 检查 gt_pc_path 是否存在
     if not os.path.exists(gt_pc_path):
         print(f"File {gt_pc_path} does not exist.")
