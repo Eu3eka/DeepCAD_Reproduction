@@ -8,7 +8,7 @@ sys.path.append("..")
 from cadlib.extrude import CADSequence
 from cadlib.macro import *
 
-DATA_ROOT = "../data"
+DATA_ROOT = "../../../autodl-tmp/data"
 RAW_DATA = os.path.join(DATA_ROOT, "cad_json")
 RECORD_FILE = os.path.join(DATA_ROOT, "train_val_test_split.json")
 
