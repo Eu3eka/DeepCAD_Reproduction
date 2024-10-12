@@ -40,20 +40,36 @@ def normalize_pc(points):
     return points
 
 
+import os
+import h5py
+import numpy as np
+import random
+
+
 def process_one(path):
+    # 读取 HDF5 文件
     with h5py.File(path, 'r') as fp:
         out_vec = fp["out_vec"][:].astype(np.float64)
-        print("Out_vec:",out_vec)
-        print(f"out_vec for {path}: {out_vec}")
         # gt_vec = fp["gt_vec"][:].astype(np.float)
 
-
+    # 从路径中提取数据 ID 和卡车 ID
     data_id = path.split('/')[-1].split('.')[0][:8]
     truck_id = data_id[:4]
+
+    # 确保 PC_ROOT 目录存在
     if not os.path.exists(PC_ROOT):
         os.makedirs(PC_ROOT)
+
+    # 创建 gt_pc_path
     gt_pc_path = os.path.join(PC_ROOT, truck_id, data_id + '.ply')
+
+    # 确保包含 truck_id 的目录存在
+    if not os.path.exists(os.path.dirname(gt_pc_path)):
+        os.makedirs(os.path.dirname(gt_pc_path))
+
     print(f"Processing file: {path}, generated gt_pc_path: {gt_pc_path}")
+
+    # 检查 gt_pc_path 是否存在
     if not os.path.exists(gt_pc_path):
         print(f"File {gt_pc_path} does not exist.")
         return None
@@ -63,20 +79,23 @@ def process_one(path):
     except Exception as e:
         print("create_CAD failed", data_id)
         return None
-    
+
     try:
         out_pc = CADsolid2pc(shape, args.n_points, data_id)
     except Exception as e:
         print("convert pc failed:", data_id)
         return None
 
-    if np.max(np.abs(out_pc)) > 2: # normalize out-of-bound data
+    # 归一化输出点云
+    if np.max(np.abs(out_pc)) > 2:  # normalize out-of-bound data
         out_pc = normalize_pc(out_pc)
 
+    # 读取地面真值点云并进行下采样
     gt_pc = read_ply(gt_pc_path)
     sample_idx = random.sample(list(range(gt_pc.shape[0])), args.n_points)
     gt_pc = gt_pc[sample_idx]
 
+    # 计算 Chamfer 距离
     cd = chamfer_dist(gt_pc, out_pc)
     return cd
 
