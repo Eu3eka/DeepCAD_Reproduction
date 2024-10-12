@@ -52,22 +52,17 @@ def process_one(path):
         out_vec = fp["out_vec"][:].astype(np.float64)
         # gt_vec = fp["gt_vec"][:].astype(np.float)
 
-    # 从路径中提取数据 ID 和卡车 ID
     data_id = path.split('/')[-1].split('.')[0][:8]
     truck_id = data_id[:4]
 
-    # 确保 PC_ROOT 目录存在
     if not os.path.exists(PC_ROOT):
         os.makedirs(PC_ROOT)
 
-    # 创建 gt_pc_path
     gt_pc_path = os.path.join(PC_ROOT, truck_id, data_id + '.ply')
 
-    # 确保包含 truck_id 的目录存在
     if not os.path.exists(os.path.dirname(gt_pc_path)):
         os.makedirs(os.path.dirname(gt_pc_path))
 
-    # 检查 gt_pc_path 是否存在
     if not os.path.exists(gt_pc_path):
         print(f"File {gt_pc_path} does not exist.")
         return None
@@ -84,7 +79,6 @@ def process_one(path):
         print("convert pc failed:", data_id)
         return None
 
-    # 归一化输出点云
     if np.max(np.abs(out_pc)) > 2:  # normalize out-of-bound data
         out_pc = normalize_pc(out_pc)
 
@@ -93,15 +87,12 @@ def process_one(path):
     sample_idx = random.sample(list(range(gt_pc.shape[0])), args.n_points)
     gt_pc = gt_pc[sample_idx]
 
-    # 计算 Chamfer 距离
     cd = chamfer_dist(gt_pc, out_pc)
     return cd
 
 
 def run(args):
     filepaths = sorted(glob.glob(os.path.join(args.src, "*.h5")))
-    print("AEevaluation using _vec.h5 Files:")
-    print(filepaths[0],filepaths[10],filepaths[20])
     if args.num != -1:
         filepaths = filepaths[:args.num]
 

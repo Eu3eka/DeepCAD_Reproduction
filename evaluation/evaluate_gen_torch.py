@@ -14,7 +14,7 @@ import sys
 sys.path.append("..")
 from utils import read_ply
 
-N_POINTS = 2000
+N_POINTS = 100
 
 random.seed(1234)
 
@@ -256,11 +256,13 @@ def collect_src_pcs(args):
     gen_pcs = []
     for path in all_paths:
         pc = read_ply(path)
+        print(f"Original shape: {pc.shape}")
         if pc.shape[0] > N_POINTS:
             pc = downsample_pc(pc, N_POINTS)
 
         # if np.max(np.abs(pc)) > 1:
         pc = normalize_pc(pc)
+        print(f"after downsampling and normalization: {pc.shape}")
         gen_pcs.append(pc)
 
     gen_pcs = np.stack(gen_pcs, axis=0)
