@@ -118,9 +118,7 @@ def run(args):
                 n_processed = len(record_res) - 3
 
     if args.parallel:
-        dists = Parallel(n_jobs=8, verbose=2)(delayed(process_one)(x) for x in filepaths)
-        print("Processed x of AE:")
-        print(dists[0],dists[2])
+        dists = Parallel(n_jobs=4, verbose=2)(delayed(process_one)(x) for x in filepaths)
     else:
         dists = []
         for i in range(len(filepaths)):
