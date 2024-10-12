@@ -42,13 +42,20 @@ def normalize_pc(points):
 
 def process_one(path):
     with h5py.File(path, 'r') as fp:
-        out_vec = fp["out_vec"][:].astype(np.float)
+        out_vec = fp["out_vec"][:].astype(np.float64)
+        print("Out_vec:"+out_vec)
+        print(f"out_vec for {path}: {out_vec}")
         # gt_vec = fp["gt_vec"][:].astype(np.float)
+
 
     data_id = path.split('/')[-1].split('.')[0][:8]
     truck_id = data_id[:4]
+    if not os.path.exists(PC_ROOT):
+        os.makedirs(PC_ROOT)
     gt_pc_path = os.path.join(PC_ROOT, truck_id, data_id + '.ply')
+    print(f"Processing file: {path}, generated gt_pc_path: {gt_pc_path}")
     if not os.path.exists(gt_pc_path):
+        print(f"File {gt_pc_path} does not exist.")
         return None
 
     try:
