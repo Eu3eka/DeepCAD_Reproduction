@@ -30,7 +30,7 @@ class CADEmbedding(nn.Module):
 
         # 打印嵌入输入的形状
         #print(f"[autoencoder.py-forward]:\n")
-        print(commands.long().dtype)
+        #print(commands.long().dtype)
         #print(f"Embedding input commands shape: {commands.shape}, args shape: {args.shape}")
 
 
