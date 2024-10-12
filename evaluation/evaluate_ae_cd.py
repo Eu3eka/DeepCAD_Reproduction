@@ -76,6 +76,8 @@ def process_one(path):
 
 def run(args):
     filepaths = sorted(glob.glob(os.path.join(args.src, "*.h5")))
+    print("AEevaluation using _vec.h5 Files:")
+    print(filepaths[0],filepaths[10],filepaths[20])
     if args.num != -1:
         filepaths = filepaths[:args.num]
 
