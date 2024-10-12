@@ -95,6 +95,8 @@ def run(args):
 
     if args.parallel:
         dists = Parallel(n_jobs=8, verbose=2)(delayed(process_one)(x) for x in filepaths)
+        print("Processed x of AE:")
+        print(dists[0],dists[2])
     else:
         dists = []
         for i in range(len(filepaths)):
