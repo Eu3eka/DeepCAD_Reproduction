@@ -1,6 +1,6 @@
 {
   "proj_dir": "proj_log",
-  "data_root": "../../../autodl-tmp/data"",
+  "data_root": "../../../autodl-tmp/data",
   "exp_name": "newDeepCAD",
   "gpu_ids": "0",
   "batch_size": 256,
