@@ -82,7 +82,6 @@ def process_one(path):
     if np.max(np.abs(out_pc)) > 2:  # normalize out-of-bound data
         out_pc = normalize_pc(out_pc)
 
-    # 读取地面真值点云并进行下采样
     gt_pc = read_ply(gt_pc_path)
     sample_idx = random.sample(list(range(gt_pc.shape[0])), args.n_points)
     gt_pc = gt_pc[sample_idx]
