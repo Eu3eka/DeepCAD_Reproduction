@@ -43,7 +43,7 @@ def normalize_pc(points):
 def process_one(path):
     with h5py.File(path, 'r') as fp:
         out_vec = fp["out_vec"][:].astype(np.float64)
-        print("Out_vec:"+out_vec)
+        print("Out_vec:",out_vec)
         print(f"out_vec for {path}: {out_vec}")
         # gt_vec = fp["gt_vec"][:].astype(np.float)
 
