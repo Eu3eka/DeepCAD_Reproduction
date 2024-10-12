@@ -77,7 +77,7 @@ class ConfigAE(object):
         parser = argparse.ArgumentParser()
 
         parser.add_argument('--proj_dir', type=str, default="proj_log", help="path to project folder where models and logs will be saved")
-        parser.add_argument('--data_root', type=str, default="../../../autodl-tmp/data", help="path to source data folder")
+        parser.add_argument('--data_root', type=str, default="../../autodl-tmp/data", help="path to source data folder")
         parser.add_argument('--exp_name', type=str, default=os.getcwd().split('/')[-1], help="name of this experiment")
         parser.add_argument('-g', '--gpu_ids', type=str, default='0', help="gpu to use, e.g. 0  0,1,2. CPU not supported.")
 
